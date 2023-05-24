@@ -60,3 +60,6 @@ Siga as instruções abaixo para instalar e acessar a interface:
 - Para editar qualquer tarefa, clique no segundo ícone (que representa um lápis) de uma determinada tarefa e modifique o título ou a descrição dela.
 - Para excluir qualquer tarefa, clique no terceiro ícone (que representa uma lixeira) e confirme a exclusão.
 - Para cadastrar ou atualizar, precisa informar os campos de título e descrição.
+
+
+### Aproveite seu mais novo gerenciador de tarefas!
