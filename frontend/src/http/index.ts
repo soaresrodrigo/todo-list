@@ -1,4 +1,4 @@
-const baseUrl = 'http://127.0.0.1:8000/api/tarefas';
+const baseUrl = import.meta.env.VITE_BASE_URL + '/api/tarefas';
 
 const req = async (url: string, method: string, data?: any) => {
   const headers = {

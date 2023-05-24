@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Tarefa extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'titulo',
+        'descricao',
+        'concluido'
+    ];
+
+    public function rules()
+    {
+        return [
+            'titulo' => 'required',
+            'descricao' => 'required'
+        ];
+    }
 }

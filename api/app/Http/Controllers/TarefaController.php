@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TarefaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function __construct(protected Tarefa $tarefa, protected Request $request)
+    {
+    }
+
     public function index()
     {
-        $tarefas = Tarefa::all();
+        $tarefas = $this->tarefa::orderByDesc('updated_at')->get();
         return response()->json($tarefas);
     }
 
@@ -21,44 +24,43 @@ class TarefaController extends Controller
      */
     public function store(Request $request)
     {
-        $tarefa = new Tarefa;
-        $tarefa->titulo = $request->input('titulo');
-        $tarefa->descricao = $request->input('descricao');
-        $tarefa->concluido = $request->input('concluido') || false;
-        $tarefa->save();
+        $validator = Validator::make($request->all(), $this->tarefa->rules());
 
-        return response()->json($tarefa, 201);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $dataForm = $request->all();
+        $data = $this->tarefa->create($dataForm);
+
+        return response()->json($data, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        $tarefa = Tarefa::findOrFail($id);
+        $tarefa = $this->tarefa->findOrFail($id);
         return response()->json($tarefa);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $tarefa = Tarefa::findOrFail($id);
-        $tarefa->titulo = $request->input('titulo');
-        $tarefa->descricao = $request->input('descricao');
-        $tarefa->concluido = $request->input('concluido');
-        $tarefa->save();
+        $tarefa = $this->tarefa->findOrFail($id);
 
-        return response()->json($tarefa);
+        $validator = Validator::make($request->all(), $this->tarefa->rules());
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $dataForm = $request->all();
+        $tarefa->update($dataForm);
+
+        return response()->json($tarefa, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $tarefa = Tarefa::findOrFail($id);
+        $tarefa = $this->tarefa->findOrFail($id);
         $tarefa->delete();
 
         return response()->json('Tarefa excluída com sucesso');

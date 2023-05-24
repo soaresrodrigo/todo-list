@@ -2,7 +2,7 @@
     <div class="content">
         <div>
             <h1>Lista de Tarefas</h1>
-            <p class="text-secondary text-center">Clique no título da tarefa para visualizar os detalhes</p>
+            <p class="text-secondary text-center">Clique no título de cada tarefa para visualizar os detalhes</p>
         </div>
         <div>
             <button class="btn btn-primary d-block" @click="abrirModal('cadastrar')"> + ADICIONAR TAREFA</button>
@@ -11,6 +11,15 @@
         <section class="lists">
             <article>
                 <h2>Para Fazer</h2>
+                <div class="message-empty" v-if="tarefasParaFazer.length === 0">
+                    <p>
+                        No momento, não existe nenhuma tarefa para ser feita.
+
+                    </p>
+                    <p>
+                        <button class="btn btn-outline-primary btn-sm" @click="abrirModal('cadastrar')"> + ADICIONAR TAREFA</button>
+                    </p>
+                </div>
                 <ul>
                     <li v-for="(tarefa) in tarefasParaFazer" :key="tarefa.id">
                         <div class="title" @click="abrirModal('detalheTarefasParaFazer', tarefa.id)">{{ tarefa.titulo }}
@@ -33,20 +42,23 @@
             </article>
             <article>
                 <h2>Feitos</h2>
+                <div class="message-empty" v-if="tarefasFeitas.length === 0">
+                    No momento, não existe nenhuma tarefa concluída.
+                </div>
                 <ul>
                     <li v-for="(tarefa) in tarefasFeitas" :key="tarefa.id">
                         <div class="title" @click="abrirModal('detalheTarefasFeitas', tarefa.id)">{{ tarefa.titulo }}</div>
 
                         <div class="action">
                             <div @click="mudarStatusDaTarefa(tarefa)" title="Reabrir tarefa">
-                                <IconUndoTask/>
+                                <IconUndoTask />
                             </div>
 
                             <div @click="abrirModal('editar', tarefa.id)" title="Editar tarefa">
-                                <IconEdit/>
+                                <IconEdit />
                             </div>
                             <div @click="excluirTarefa(tarefa.id)" title="Deletar tarefa">
-                                <IconDelete/>
+                                <IconDelete />
                             </div>
                         </div>
 
@@ -196,7 +208,7 @@ export default {
     flex-direction: column;
     gap: 50px;
     padding: 20px 10px;
-    height: 100vh;
+    min-height: 100vh;
 
     h1 {
         text-align: center;
@@ -210,6 +222,11 @@ export default {
     max-width: 100%;
     gap: 30px;
     justify-content: space-between;
+
+    .message-empty {
+        text-align: center;
+        color: #999;
+    }
 
     article {
         background-color: #eeeef2;
@@ -259,16 +276,9 @@ export default {
                             opacity: 1;
                         }
                     }
-
-
                 }
-
-
             }
-
         }
-
-
     }
 
     @media (max-width: 1000px) {

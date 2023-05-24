@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('titulo');
             $table->text('descricao');
-            $table->string('cor');
-            $table->boolean('concluido')->default(false)->nullable();
+            $table->boolean('concluido')->default(false);
             $table->timestamps();
         });
     }
