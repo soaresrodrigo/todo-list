@@ -1,3 +1,4 @@
+![Peek 23-05-2023 22-47](https://github.com/soaresrodrigo/todo-list/assets/15149046/332d047b-0da4-45f7-aca5-80c1c8bd5b31)
 # Bem vindo a documentação do sistema lista de tarefas
 
 ## Esse projeto foi dividido em 2 módulos, sendo eles api e frontend. A *API* foi feita em laravel e precisa ser levantada antes do frontend, e o *frontend* foi feito em vue js.
@@ -10,9 +11,9 @@ Este é um projeto Laravel que implementa uma lista de tarefas (todolist) simple
 
 ## Pré-requisitos
 
-- PHP >= 7.4
+- PHP >= 7.3
 - Composer
-- Servidor de banco de dados (por exemplo, MySQL ou SQLite)
+- Servidor de banco de dados MySql
 
 ## Instalação
 
